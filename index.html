@@ -3,31 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playwrite+DE+Grund:wght@100..400&family=Varela+Round&display=swap" rel="stylesheet">
   <title>To do!</title>
   <link rel="stylesheet" href="./styles/main.css">
   <link rel="stylesheet" href="./styles/pushpin.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playwrite+DE+Grund:wght@100..400&family=Varela+Round&display=swap" rel="stylesheet">
 </head>
 <body>
-  <section id="new-post-it">
+  <section id="new-sticky" class="sticky">
     <h1>New sticky note</h1>
-    <input type="text" name="new-post-input" id="new-post-input" placeholder="To do">
+    <input type="text" name="new-post-input" id="new-post-input" placeholder="To do.." autocomplete="off">
     <button id="add">Stick to board</button>
+    <div id="error-messages" class="sticky">
+    </div>
   </section>
 
-  <div id="bulletin-board">
-    <div id="title">
-      <h1>
-        <div id ="pushpin1" class="pushpin"></div>
-        TO-DO LIST
-        <div id ="pushpin2" class="pushpin"></div>
-      </h1>
+  <div id="board-border" class="wood-texture">
+    <div id="bulletin-board">
+      <div id="title">
+        <h1>
+          <div id ="pushpin1" class="pushpin"></div>
+          TO-DO LIST
+          <p>click on a note to change or remove it</p>
+          <div id ="pushpin2" class="pushpin"></div>
+        </h1>
+      </div>
+      
+      <main id="container">
+      </main>
     </div>
-
-    <main id="container">
-    </main>
   </div>
   <script src="./script/main.js" type="module"></script> 
 </body>

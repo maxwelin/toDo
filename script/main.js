@@ -1,9 +1,9 @@
 import StickyNoteHandler from "./StickyNoteHandler.js"
 
-const stickyNoteHandler = new StickyNoteHandler
+const stickyNoteHandler = new StickyNoteHandler()
 
-const main = (() => {
+const main = () => {
   stickyNoteHandler.addEventListener()
-})
+}
 
-window.document.onload = main()
+window.onload = main

@@ -1,0 +1,125 @@
+body{
+  display: flex;
+  width: 90%;
+  height: 100%;
+  font-family: "Caveat", cursive;
+}
+
+#new-post-it{
+  font-size: 1.7em;
+  background-image: linear-gradient(160deg, #fff89a, #f7e55b);
+  width: 250px;
+  height: 250px;
+  text-align: center;
+  box-shadow: 3px 10px 7px rgba(0, 0, 0, 0.2);
+}
+
+#new-post-input{
+  width: 200px;
+  height: 30px;
+  font-size: 1em;
+  font-family: "Caveat", cursive;
+  border: none;
+}
+
+#add{
+  border: 1px solid black;
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 55px;
+}
+
+#bulletin-board{
+  margin: 0 auto;
+  position: relative;
+  width: 1250px;
+  height: 800px;
+  background: url("/img/kork.jpg");
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+#bulletin-board h1{
+  font-size: 3em;
+  position: absolute;
+  text-align: center;
+  top: 10px;
+  transform: rotate(-2deg);
+  left: 325px;
+  width: 600px;
+  height: 100px;
+  padding-top: 50px;
+  background-image: linear-gradient(160deg, #ffffff, #ebebeb);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#container{
+  margin-bottom: 50px;
+  display: grid;
+  gap: 2em;
+  grid-template-columns: repeat(6, 150px);
+  grid-template-rows: repeat(3, 150px);
+}
+
+button{
+  cursor: pointer;
+}
+
+.post-it{
+  font-size: 2.05em;
+  padding: 5px;
+  padding-top: 20px;
+  height: 130px;
+  width: 150px;
+  box-shadow: 3px 10px 7px rgba(0, 0, 0, 0.6);
+  font-optical-sizing: auto;
+  cursor: pointer;
+  user-select: none;
+  transform: scale(1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow-wrap: break-word; 
+  word-break: break-word;      
+  hyphens: auto;  
+  overflow-y: hidden;
+}
+
+.post-it.active{
+  transform: scale(1.5) !important;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 25px 25px 20px rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.ver1{
+  background-image: linear-gradient(160deg, #fff89a, #f7e55b);
+}
+.ver2{
+  background-image: linear-gradient(160deg, #ffe0e0, #ff99cc);
+}
+.ver3{
+  background-image: linear-gradient(160deg, #c9f7d8, #8ee3a1);
+}
+.ver4{
+  background-image: linear-gradient(160deg, #ffdfcc, #ffab6f);
+}
+.ver5{
+  background-image: linear-gradient(160deg, #e0ccff, #9d66ff);
+}
+.ver6{
+  background-image: linear-gradient(160deg, #fff9b3, #f2e04d);
+}
+.ver7{
+  background-image: linear-gradient(160deg, #ffb3b3, #ff6666);
+}
+.ver8{
+  background-image: linear-gradient(160deg, #fff89a, #f7e55b);
+}
+.ver9{
+  background-image: linear-gradient(160deg, #e6ccff, #d699ff);
+}
+.ver10{
+  background-image: linear-gradient(160deg, #ffcc99, #ff9966);
+}

@@ -80,7 +80,7 @@ body {
   align-items: flex-end;
 }
 
-#bulletin-board h1{
+#title h1{
   font-size: 3em;
   position: absolute;
   text-align: center;
@@ -92,9 +92,38 @@ body {
   padding-top: 50px;
   background-image: linear-gradient(160deg, #ffffff, #ebebeb);
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
+  /* visibility: hidden; */
 }
 
-#bulletin-board p{
+#reset-board h1{
+  position: absolute;
+  font-weight: lighter;
+  font-size: 5em;
+  text-align: center;
+  padding-bottom: 5px;
+  top: 10px;
+  left: 100px;
+  transform: rotate(-3deg);
+  width: 120px;
+  background-image: linear-gradient(160deg, #ffffff, #ebebeb);
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  user-select: none;
+}
+
+#reset-board h1:hover{
+  background-image: linear-gradient(160deg, #ffb3b3, #ff6666);
+}
+
+#reset-board p{
+  position: absolute;
+  font-size: 0.6em;
+  bottom: -57px;
+  left: 15px;
+  user-select: none;
+}
+
+#title p{
   position: absolute;
   font-size: 0.6em;
   bottom: -25px;
@@ -113,7 +142,8 @@ button{
   cursor: pointer;
 }
 
-.post-it{
+.sticky-note{
+  position: relative;
   font-size: 1.8em;
   padding: 5px;
   padding-top: 5px;
@@ -128,14 +158,46 @@ button{
   overflow-wrap: break-word; 
   word-break: break-word;      
   hyphens: auto;  
-  overflow-y: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none
 }
 
-.post-it.active{
+.sticky-note.active{
   transform: scale(1.5) !important;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 25px 25px 20px rgba(0, 0, 0, 0.4);
   z-index: 1;
+}
+
+.button-container{
+  display: flex;
+  width: 100%;
+  position: sticky;
+  justify-content: space-around;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.button-container button{
+  min-width: 50px;
+}
+
+.button-container.active{
+  pointer-events: all;
+  visibility: visible;
+}
+
+.button-container button{
+  font-size: 8px;
+}
+
+#remove{
+  color: red;
+}
+
+#done{
+  color: green;
 }
 
 .ver1{

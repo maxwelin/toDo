@@ -32,6 +32,24 @@
   transform: rotate(10deg);
 }
 
+#pushpin4{
+  position: absolute;
+  left: 140px;
+  top: 0px;
+  width: 15px;
+  height: 15px;
+  transform: rotate(40deg);
+}
+
+#pushpin5{
+  position: absolute;
+  left: 30px;
+  top: -5px;
+  width: 15px;
+  height: 15px;
+  transform: rotate(70deg);
+}
+
 #pushpin1:before {
   content: ':)';
   color: red;
@@ -94,5 +112,47 @@
   height: 12px;
   background-image: linear-gradient(160deg, #44ff8c, #2a5803);
   box-shadow: 5px 15px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+#pushpin4:before {
+  content: '';
+  position: absolute;
+  left: 85%;
+  width: 1px;
+  height: 7px;
+  background-color: rgb(0, 0, 0);
+}
+
+#pushpin4:after {
+  content: '';
+  position: absolute;
+  top: -70%;
+  left: 45%;
+  width: 12px;
+  height: 12px;
+  background-image: linear-gradient(160deg, #fffd74, #919400);
+  box-shadow: 5px 10px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+#pushpin5:before {
+  content: '';
+  position: absolute;
+  left: 85%;
+  width: 1px;
+  height: 10px;
+  background-color: rgb(0, 0, 0);
+}
+
+#pushpin5:after {
+  content: '';
+  position: absolute;
+  top: -70%;
+  left: 45%;
+  width: 12px;
+  height: 12px;
+  background-image: linear-gradient(160deg, #449bff, #02157e);
+  box-shadow: 5px 10px 7px rgba(0, 0, 0, 0.3);
   border-radius: 50%;
 }

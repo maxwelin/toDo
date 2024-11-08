@@ -5,6 +5,7 @@ const stickyNoteHandler = new StickyNoteHandler()
 const main = () => {
   stickyNoteHandler.eventStickToBoard()
   stickyNoteHandler.eventResetBoard()
+  stickyNoteHandler.eventResetDoneBoard()
 }
 
 window.onload = main

@@ -1,0 +1,65 @@
+
+#done-border{
+  margin-left: 20px;
+  display: flex;
+  min-width: 420px;
+  height: 650px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 0, 0);
+  border: 2px solid #8B4513;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 1);
+}
+
+#done-board{
+  position: relative;
+  width: 400px;
+  height: 630px;
+  background: url("../img/kork.jpg");
+  border: 2px solid #8B4513;
+  display: flex;
+  justify-content: center;
+}
+
+#done-container{
+  display: grid;
+  margin-top: 100px;
+  gap: 0.5em;
+  grid-template-columns: repeat(3, 120px);
+  grid-template-rows: repeat(5, 120px);
+}
+
+#done-board-title h1{
+  font-size: em;
+  position: absolute;
+  text-align: center;
+  top: -20px;
+  left: 90px;
+  transform: rotate(-5deg);
+  width: 200px;
+  height: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-image: linear-gradient(160deg, #ffffff, #ebebeb);
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#reset-done-board h1{
+  position: absolute;
+  font-weight: lighter;
+  font-size: 3em;
+  text-align: center;
+  padding-bottom: 5px;
+  top: -25px;
+  right: 15px;
+  transform: rotate(+2deg);
+  width: 75px;
+  background-image: linear-gradient(160deg, #ffffff, #ebebeb);
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  user-select: none;
+}
+
+#reset-done-board h1:hover{
+  background-image: linear-gradient(160deg, #ffb3b3, #ff6666);
+}

@@ -9,6 +9,7 @@
   <title>To do!</title>
   <link rel="stylesheet" href="./styles/main.css">
   <link rel="stylesheet" href="./styles/pushpin.css">
+  <link rel="stylesheet" href="./styles/doneboard.css">
 </head>
 <body>
   <section id="new-sticky" class="sticky">
@@ -21,15 +22,7 @@
 
   <div id="board-border" class="wood-texture">
     <div id="bulletin-board">
-
-      <div id="reset-board">
-        <h1>
-          <div id ="pushpin3" class="pushpin"></div>
-          🗑
-          <p>reset</p>
-        </h1>
-      </div>
-
+      
       <div id="title">
         <h1>
           <div id ="pushpin1" class="pushpin"></div>
@@ -39,11 +32,44 @@
         </h1>
       </div>
       
+      <div id="reset-board">
+        <h1>
+          <div id ="pushpin3" class="pushpin"></div>
+           🗑
+          <p>reset</p>
+         </h1>
+      </div>
+      
       <main id="container">
         
       </main>
     </div>
   </div>
+</div>
+
+    <div id ="done-border">
+      <div id="done-board">
+
+        <div id="done-board-title">
+          <h1>
+            <div id ="pushpin3" class="pushpin"></div>
+            DONE!
+            <div id ="pushpin4" class="pushpin"></div>
+          </h1>
+        </div>
+        
+        <div id="reset-done-board">
+          <h1>
+            <div id ="pushpin5" class="pushpin"></div>
+             🗑
+           </h1>
+        </div>
+
+        <main id="done-container">
+          
+        </main>
+    </div>
+
   <script src="./script/main.js" type="module"></script> 
 </body>
 </html>

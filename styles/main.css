@@ -25,6 +25,18 @@ body {
   transform: rotate(-3deg);
 }
 
+#new-sticky button{
+  box-shadow: 0px 2px 1px black;
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  transition: transform 0.1s;
+}
+
+#new-sticky button:hover{
+  transform: scale(1.2);
+}
+
 #new-post-input{
   width: 80%;
   height: 30px;
@@ -38,6 +50,8 @@ body {
   height: 30px;
   border-radius: 5px;
   margin-top: 55px;
+  font-family: "Caveat", cursive;
+  font-size: 0.7em;
 }
 
 #error-messages{
@@ -148,10 +162,11 @@ button{
 
 .sticky-note{
   position: relative;
-  font-size: 1.5em;
-  padding: 5px;
-  padding-top: 22px;
-  height: 115px;
+  font-size: 1.3em;
+  padding-top: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 105px;
   width: 120px;
   box-shadow: 3px 10px 7px rgba(0, 0, 0, 0.4);
   font-optical-sizing: auto;
@@ -190,21 +205,22 @@ button{
   font-family: "Caveat", cursive;
   min-width: 40px;
   height: 20px;
-  font-size: 11px;
+  font-size: 8px;
   border: none;
   border-radius: 10px;
+  transition: box-shadow 0.1s;
 }
 
 #remove:hover{
-  box-shadow: 0px 1px 2px red;
+  box-shadow: 0px 1px 1px red;
 }
 
 #done:hover{
-  box-shadow: 0px 1px 2px green;
+  box-shadow: 0px 1px 1px green;
 }
 
 #edit:hover{
-  box-shadow: 0px 1px 2px black;
+  box-shadow: 0px 1px 1px black;
 }
 
 .button-container.active{
@@ -225,29 +241,29 @@ button{
   background-image: linear-gradient(160deg, #fff89a, #f7e55b);
 }
 .ver2{
-  background-image: linear-gradient(160deg, #ffe0e0, #ff99cc);
+  background-image: linear-gradient(160deg, #ffd5a2, #ffb066);
 }
 .ver3{
-  background-image: linear-gradient(160deg, #c9f7d8, #8ee3a1);
+  background-image: linear-gradient(160deg, #c8f7c5, #a1e6a1);
 }
 .ver4{
-  background-image: linear-gradient(160deg, #ffdfcc, #ffab6f);
+  background-image: linear-gradient(160deg, #a8f7e5, #6fd6c4);
 }
 .ver5{
-  background-image: linear-gradient(160deg, #e0ccff, #9d66ff);
+  background-image: linear-gradient(160deg, #a7e3ff, #6fc9f7);
 }
 .ver6{
-  background-image: linear-gradient(160deg, #fff9b3, #f2e04d);
+  background-image: linear-gradient(160deg, #d1d9ff, #a1b6f7);
 }
 .ver7{
-  background-image: linear-gradient(160deg, #ffb3b3, #ff6666);
+  background-image: linear-gradient(160deg, #e8d1ff, #c6a7f7);
 }
 .ver8{
-  background-image: linear-gradient(160deg, #fff89a, #f7e55b);
+  background-image: linear-gradient(160deg, #ffd6e7, #f7a1c7);
 }
 .ver9{
-  background-image: linear-gradient(160deg, #e6ccff, #d699ff);
+  background-image: linear-gradient(160deg, #ffc5e3, #e89bcf);
 }
 .ver10{
-  background-image: linear-gradient(160deg, #ffcc99, #ff9966);
+  background-image: linear-gradient(160deg, #f0e2d1, #d2b8a1);
 }

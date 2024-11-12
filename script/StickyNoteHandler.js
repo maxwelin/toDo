@@ -41,12 +41,14 @@ export default class StickyNoteHandler{
   createStickyNote(){
     const rnd = Math.floor(Math.random() * 31) - 15
     const stickyNote = document.createElement("div")
+    const stickyNoteText = document.createElement("div")
 
-    stickyNote.innerText = this.inputNewSticky.value
+    stickyNoteText.innerText = this.inputNewSticky.value
     stickyNote.id = `${this.inputNewSticky.value.slice(0, 5)}${rnd}`
     stickyNote.classList.add("sticky-note")
     stickyNote.classList.add(`ver${Math.floor(Math.random() * 10) + 1}`)
     stickyNote.style.transform = `rotate(${rnd}deg)`
+    stickyNote.appendChild(stickyNoteText)
     return stickyNote
   } 
 
@@ -69,7 +71,7 @@ export default class StickyNoteHandler{
           secondBoardNotes[i].children[0].classList.remove("active")
         }
       }
-      if(stickyNote == e.target){
+      if(stickyNote == e.target && e.currentTarget.contentEditable !== "true"){
         stickyNote.classList.toggle("active")
         btnContainer.classList.toggle("active")
       }
@@ -110,8 +112,12 @@ export default class StickyNoteHandler{
     btn.addEventListener("click", ((e) => {
       const currentTarget = e.currentTarget.parentNode.parentNode
       
-      if(currentTarget.innerText === "\n"){
-        console.log("big true")
+      if(currentTarget.firstElementChild.innerText === "\n"){
+        this.errorHandler.emptyEditError()
+        currentTarget.focus()
+        btn.innerText = "SAVE"
+        e.stopPropagation()
+        return
       }
 
       currentTarget.contentEditable = !this.toggle
@@ -130,6 +136,15 @@ export default class StickyNoteHandler{
 
   stickyDone(btn){
     btn.addEventListener("click", ((e) => {
+      const currentTarget = e.currentTarget.parentNode.parentNode
+
+      if(currentTarget.firstElementChild.innerText === "\n"){
+        this.errorHandler.emptyEditError()
+        currentTarget.focus()
+        e.stopPropagation()
+        return
+      }
+
      if(this.doneContainer.children.length >= 12) {
       this.errorHandler.doneBoardIsFullError()
       return

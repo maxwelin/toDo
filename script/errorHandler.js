@@ -9,6 +9,13 @@ export default class ErrorHandler{
         Write something before sticking it to the board.</p>`
     this.playErrorMessageAnimation()
   }
+
+  emptyEditError(){
+    this.errorMessages.innerHTML = 
+    `<p>Don't waste sticky notes!<br>
+        No point in having empty notes on the board.</p>`
+    this.playErrorMessageAnimation()
+  }
   
   boardIsFullError(){
     this.errorMessages.innerHTML = 

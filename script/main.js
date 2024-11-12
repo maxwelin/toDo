@@ -1,9 +1,11 @@
+import ErrorHandler from "./errorHandler.js"
 import StickyNoteHandler from "./StickyNoteHandler.js"
 
-const stickyNoteHandler = new StickyNoteHandler()
+const errorHandler = new ErrorHandler()
+const stickyNoteHandler = new StickyNoteHandler(errorHandler)
 
 const main = () => {
-  stickyNoteHandler.initialize()
+  stickyNoteHandler.addEventListeners()
 }
 
 window.onload = main

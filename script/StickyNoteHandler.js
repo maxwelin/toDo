@@ -1,18 +1,19 @@
 
 export default class StickyNoteHandler{
+  constructor(errorHandler){
+    this.errorHandler = errorHandler;
+  }
   
   addBtn = document.getElementById("add")
   inputNewSticky = document.getElementById("new-post-input")
   container = document.getElementById("container")
   doneContainer = document.getElementById("done-container")
-  errorMessages = document.getElementById("error-messages")
   trashIcon = document.getElementById("reset-board")
   doneBoardTrashIcon = document.getElementById("reset-done-board")
-  slapSound = new Audio("../punch.wav")
   toggle = false;
 
   
-  initialize(){
+  addEventListeners(){
     this.addEventStickToBoard()
     this.addEventResetBoard()
     this.addEventResetDoneBoard()
@@ -22,74 +23,33 @@ export default class StickyNoteHandler{
   addEventStickToBoard(){
     this.addBtn.addEventListener("click", (() => {
       if(this.container.children.length >= 18) {
-        this.boardIsFullError()
-        if(this.errorMessages.innerHTML && !this.errorMessages.classList.contains("visible")){
-          this.playSlapSound()
-          this.errorMessages.classList.add("visible")
-        } return }
-        
-        if(!this.inputNewSticky.value){
-          this.emptyInputError()
-          if(this.errorMessages.innerHTML && !this.errorMessages.classList.contains("visible")){
-            this.playSlapSound()
-            this.errorMessages.classList.add("visible")
-          } return }
-          
-          this.styleAndAppendStickyNote()
-          this.removeErrorMessages()
-          this.inputNewSticky.value = ""
-          this.inputNewSticky.focus()
-          
-        }))
-        
+        this.errorHandler.boardIsFullError()
+        return
       }
-      
-      emptyInputError(){
-        this.errorMessages.innerHTML = 
-        `<p>Don't waste sticky notes!<br>
-        Write something before sticking it to the board.</p>`
+      if(!this.inputNewSticky.value){
+        this.errorHandler.emptyInputError()
         this.inputNewSticky.focus()
-      }
-      
-      boardIsFullError(){
-        this.errorMessages.innerHTML = 
-        `<p>Board is CLEARLY<br>
-        very full!<br>
-        Get to work!</p>`
-      }
-      
-      doneBoardIsFullError(){
-        this.errorMessages.innerHTML = 
-        `<p>Can't you see the board is full?<br>
-      You gotta remove<br>
-      some sticky notes first!</p>`
-    }
-    
-    removeErrorMessages(){
-      setTimeout(() => {
-        this.errorMessages.innerHTML = ""
-        this.errorMessages.classList.remove("visible")
-      }, 200)
-    }
-    
-    playSlapSound(){
-      setTimeout(() => {
-        this.slapSound.volume = 0.2
-        this.slapSound.play()
-      }, 40)
-    }
-    
-    createStickyNote(){
-      const rnd = Math.floor(Math.random() * 31) - 15
-      const stickyNote = document.createElement("div")
+        return 
+      } 
+      this.styleAndAppendStickyNote()
+      this.errorHandler.removeErrorMessages()
+      this.inputNewSticky.value = ""
+      this.inputNewSticky.focus()   
+    }))      
+  }
+ 
+  createStickyNote(){
+    const rnd = Math.floor(Math.random() * 31) - 15
+    const stickyNote = document.createElement("div")
+
     stickyNote.innerText = this.inputNewSticky.value
     stickyNote.id = `${this.inputNewSticky.value.slice(0, 5)}${rnd}`
     stickyNote.classList.add("sticky-note")
     stickyNote.classList.add(`ver${Math.floor(Math.random() * 10) + 1}`)
     stickyNote.style.transform = `rotate(${rnd}deg)`
     return stickyNote
-  }
-  
+  } 
+
   styleAndAppendStickyNote(){
     const btnContainer = this.createButtonContainer()
     const stickyNote = this.createStickyNote()
@@ -121,14 +81,14 @@ export default class StickyNoteHandler{
   addEventResetBoard(){
     this.trashIcon.addEventListener("click", (() => {
       this.container.innerHTML = ""
-      this.removeErrorMessages()
+      this.errorHandler.removeErrorMessages()
     }))
   }
   
   addEventResetDoneBoard(){
     this.doneBoardTrashIcon.addEventListener("click", (() => {
       this.doneContainer.innerHTML = ""
-      this.removeErrorMessages()
+      this.errorHandler.removeErrorMessages()
     }))
   }
   
@@ -143,17 +103,22 @@ export default class StickyNoteHandler{
   removeSticky(btn){
     btn.addEventListener("click", ((e) => {
       e.currentTarget.parentNode.parentNode.remove()
-      }))
+    }))
   }
 
   editSticky(btn){
     btn.addEventListener("click", ((e) => {
       const currentTarget = e.currentTarget.parentNode.parentNode
+      
+      if(currentTarget.innerText === "\n"){
+        console.log("big true")
+      }
+
       currentTarget.contentEditable = !this.toggle
 
       if(currentTarget.contentEditable == "true"){
         currentTarget.focus()
-        btn.innerText = "DONE?"
+        btn.innerText = "SAVE"
       } else {
         btn.innerText = "EDIT"
       }
@@ -166,17 +131,14 @@ export default class StickyNoteHandler{
   stickyDone(btn){
     btn.addEventListener("click", ((e) => {
      if(this.doneContainer.children.length >= 12) {
-       this.doneBoardIsFullError()
-       if(this.errorMessages.innerHTML && !this.errorMessages.classList.contains("visible")){
-        this.playSlapSound()
-        this.errorMessages.classList.add("visible")
-        } return }
-
+      this.errorHandler.doneBoardIsFullError()
+      return
+      }
       e.target.parentNode.parentNode.classList.remove("active")
       this.doneContainer.appendChild(e.target.parentNode.parentNode)
       e.target.parentNode.children[0].remove()
 
-      this.removeErrorMessages()
+      this.errorHandler.removeErrorMessages()
     }))
   }
 

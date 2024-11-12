@@ -1,52 +1,36 @@
-
-#pushpin{
+.pushpin{
   position: absolute;
-  top: 50px;
+  height: 15px;
+  width: 15px;
 }
 
-
 #pushpin1{
-  position: absolute;
   right: 19px;
   top: 13px;
-  width: 15px;
-  height: 15px;
   transform: rotate(40deg);
 }
 
 #pushpin2{
-  position: absolute;
   left: 10px;
   top: 5px;
-  width: 15px;
-  height: 15px;
   transform: rotate(-20deg);
 }
 
 #pushpin3{
-  position: absolute;
   left: 50px;
   top: 0px;
-  width: 15px;
-  height: 15px;
   transform: rotate(10deg);
 }
 
 #pushpin4{
-  position: absolute;
   left: 140px;
   top: 0px;
-  width: 15px;
-  height: 15px;
   transform: rotate(40deg);
 }
 
 #pushpin5{
-  position: absolute;
   left: 30px;
   top: -5px;
-  width: 15px;
-  height: 15px;
   transform: rotate(70deg);
 }
 

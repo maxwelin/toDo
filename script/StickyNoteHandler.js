@@ -152,17 +152,17 @@ export default class StickyNoteHandler{
     container.contentEditable = false
     
     editBtn.id = "edit"
-    editBtn.innerText = "EDIT"
-    this.editSticky(editBtn)
-    
-    removeBtn.id = "remove"
-    removeBtn.innerText = "REMOVE"
-    this.removeSticky(removeBtn)
-
     doneBtn.id = "done"
+    removeBtn.id = "remove"
+    
+    editBtn.innerText = "EDIT"
+    removeBtn.innerText = "REMOVE"
     doneBtn.innerText = "DONE"
-    this.stickyDone(doneBtn)
 
+    this.editSticky(editBtn)
+    this.removeSticky(removeBtn)
+    this.stickyDone(doneBtn)
+    
     container.append(doneBtn, editBtn, removeBtn)
 
     return container

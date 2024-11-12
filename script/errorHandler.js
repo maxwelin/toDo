@@ -44,7 +44,7 @@ export default class ErrorHandler{
     setTimeout(() => {
       this.slapSound.volume = 0.2
       this.slapSound.play()
-    }, 40)
+    }, 60)
   }
   
 }

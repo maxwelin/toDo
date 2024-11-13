@@ -62,21 +62,22 @@ export default class StickyNoteHandler{
       for (let i = 0; i < mainBoardNotes.length; i++) {
         if(mainBoardNotes[i] != e.target && mainBoardNotes[i].contentEditable !== "true"){
           mainBoardNotes[i].classList.remove("active")
-          mainBoardNotes[i].children[0].classList.remove("active")
+          // mainBoardNotes[i].children[0].classList.remove("active")
         }
       }
       for (let i = 0; i < secondBoardNotes.length; i++) {
         if(secondBoardNotes[i] != e.target && secondBoardNotes[i].contentEditable !== "true"){
           secondBoardNotes[i].classList.remove("active")
-          secondBoardNotes[i].children[0].classList.remove("active")
+          // secondBoardNotes[i].children[0].classList.remove("active")
         }
       }
       if(stickyNote == e.target && e.currentTarget.contentEditable !== "true"){
         stickyNote.classList.toggle("active")
-        btnContainer.classList.toggle("active")
+        // btnContainer.classList.toggle("active")
       }
     }
     stickyNote.addEventListener("click", handleClick)
+    stickyNote.firstElementChild.addEventListener("click", handleClick)
     stickyNote.appendChild(btnContainer)
     this.container.appendChild(stickyNote)
   }
@@ -170,12 +171,22 @@ export default class StickyNoteHandler{
   stickyDone(btn){
     btn.addEventListener("click", ((e) => {
       const currentTarget = e.currentTarget.parentNode.parentNode
+      const childDivs = currentTarget.querySelectorAll("div")
 
-      if(currentTarget.firstElementChild.innerText === "\n"){
-        this.errorHandler.emptyEditError()
-        currentTarget.focus()
-        e.stopPropagation()
-        return
+      let hasText = false;
+      
+      for (let i = 0; i < childDivs.length; i++) {
+        if(childDivs[i].innerText !== "\n"){
+          hasText = true
+          break
+        }
+      }
+      if(!hasText){
+          this.errorHandler.emptyEditError()
+          currentTarget.focus()
+          btn.innerText = "SAVE"
+          e.stopPropagation()
+          return
       }
 
      if(this.doneContainer.children.length >= 12) {

@@ -56,17 +56,17 @@ export default class StickyNoteHandler{
     const btnContainer = this.createButtonContainer()
     const stickyNote = this.createStickyNote()
     
-    stickyNote.addEventListener("click", ((e) => {
+    const handleClick = (e) => {
       const mainBoardNotes = this.container.children
       const secondBoardNotes = this.doneContainer.children
       for (let i = 0; i < mainBoardNotes.length; i++) {
-        if(mainBoardNotes[i] != e.target){
+        if(mainBoardNotes[i] != e.target && mainBoardNotes[i].contentEditable !== "true"){
           mainBoardNotes[i].classList.remove("active")
           mainBoardNotes[i].children[0].classList.remove("active")
         }
       }
       for (let i = 0; i < secondBoardNotes.length; i++) {
-        if(secondBoardNotes[i] != e.target){
+        if(secondBoardNotes[i] != e.target && secondBoardNotes[i].contentEditable !== "true"){
           secondBoardNotes[i].classList.remove("active")
           secondBoardNotes[i].children[0].classList.remove("active")
         }
@@ -75,7 +75,8 @@ export default class StickyNoteHandler{
         stickyNote.classList.toggle("active")
         btnContainer.classList.toggle("active")
       }
-    }))
+    }
+    stickyNote.addEventListener("click", handleClick)
     stickyNote.appendChild(btnContainer)
     this.container.appendChild(stickyNote)
   }
@@ -108,16 +109,47 @@ export default class StickyNoteHandler{
     }))
   }
 
+  preventRemovalOfBtnContainer(currentTarget){
+    currentTarget.addEventListener('keydown', function(event) {
+      const buttonContainer = event.currentTarget.querySelector(".button-container")
+      const childDivs = event.currentTarget.querySelectorAll("div")
+      let hasText = false;
+      
+      for (let i = 0; i < childDivs.length; i++) {
+        if(childDivs[i].innerText !== "\n"){
+          hasText = true;
+          break
+        }
+      }
+  
+      if (event.key === 'Backspace' || event.key === 'Delete') {
+        if (document.activeElement.contains(buttonContainer) && !hasText) {
+          event.preventDefault();
+        }
+      }
+    });
+    
+  }
+
   editSticky(btn){
     btn.addEventListener("click", ((e) => {
       const currentTarget = e.currentTarget.parentNode.parentNode
+      const childDivs = currentTarget.querySelectorAll("div")
+      this.preventRemovalOfBtnContainer(currentTarget)
+      let hasText = false;
       
-      if(currentTarget.firstElementChild.innerText === "\n"){
-        this.errorHandler.emptyEditError()
-        currentTarget.focus()
-        btn.innerText = "SAVE"
-        e.stopPropagation()
-        return
+      for (let i = 0; i < childDivs.length; i++) {
+        if(childDivs[i].innerText !== "\n"){
+          hasText = true
+          break
+        }
+      }
+      if(!hasText){
+          this.errorHandler.emptyEditError()
+          currentTarget.focus()
+          btn.innerText = "SAVE"
+          e.stopPropagation()
+          return
       }
 
       currentTarget.contentEditable = !this.toggle
@@ -131,6 +163,7 @@ export default class StickyNoteHandler{
       this.toggle = !this.toggle
       //!!!!!!!!!---------DISABLE OTHER EVENTLISTENERS AND REENABLE THEM WHEN DONE EDITING?!!-------------
       e.stopPropagation()
+      this.errorHandler.removeErrorMessages()
     }))
   }
 
@@ -158,7 +191,7 @@ export default class StickyNoteHandler{
   }
 
   createButtonContainer(){
-    let container = document.createElement("div")
+    let container = document.createElement("section")
     let removeBtn = document.createElement("button")
     let editBtn = document.createElement("button")
     let doneBtn = document.createElement("button")

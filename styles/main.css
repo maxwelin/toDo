@@ -195,8 +195,8 @@ button{
   left: 0;
   top: 1px;
   justify-content: space-around;
-  /* pointer-events: none;
-  visibility: hidden; */
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .button-container button{
@@ -221,11 +221,11 @@ button{
 #edit:hover{
   box-shadow: 0px 1px 1px black;
 }
-/* 
+
 .button-container.active{
   pointer-events: all;
   visibility: visible;
-} */
+}
 
 
 #remove{

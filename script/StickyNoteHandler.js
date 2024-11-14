@@ -3,9 +3,9 @@ export default class StickyNoteHandler{
     this.errorHandler = errorHandler;
   }
   
-  toDoBoard = document.getElementById("container")
-  doneBoard = document.getElementById("done-container")
-  trashIcon = document.getElementById("reset-board")
+  toDoBoard = document.getElementById("to-do-grid")
+  doneBoard = document.getElementById("done-grid")
+  trashIcon = document.getElementById("reset-to-do")
   stickToBoardBtn = document.getElementById("add")
   newStickyInput = document.getElementById("new-post-input")
   doneBoardTrashIcon = document.getElementById("reset-done-board")
@@ -140,6 +140,7 @@ export default class StickyNoteHandler{
     btn.addEventListener("click", ((e) => {
       const stickyNote = e.currentTarget.parentNode.parentNode
       const divChildren = stickyNote.querySelectorAll("div")
+
       this.preventRemovalOfBtnContainer(stickyNote)
       let hasText = this.hasInnerText(stickyNote)
       
@@ -178,7 +179,6 @@ export default class StickyNoteHandler{
     })
   }
         
-
   hasInnerText(currentTarget){
     const divChildren = currentTarget.querySelectorAll("div")
       let hasText = false;

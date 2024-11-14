@@ -66,89 +66,10 @@ body {
   transition: transform 0.25s;
 }
 
-.visible{
+#error-messages.visible{
   transform: rotate(-6deg) scale(1) translateY(0) !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-}
-
-#board-border{
-  display: flex;
-  min-width: 920px;
-  height: 650px;
-  align-items: center;
-  background-color: rgb(0, 0, 0);
-  border: 2px solid #8B4513;
-  box-shadow: 5px 10px 20px rgba(0, 0, 0, 1);
-}
-
-#bulletin-board{
-  margin: 0 auto;
-  position: relative;
-  width: 900px;
-  height: 630px;
-  background: url("../img/kork.jpg");
-  border: 2px solid #8B4513;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-#title h1{
-  font-size: 3em;
-  position: absolute;
-  text-align: center;
-  top: -20px;
-  transform: rotate(2deg);
-  left: 180px;
-  width: 500px;
-  height: 100px;
-  padding-top: 40px;
-  background-image: linear-gradient(160deg, #ffffff, #ebebeb);
-  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
-}
-
-#reset-board h1{
-  position: absolute;
-  font-weight: lighter;
-  font-size: 5em;
-  text-align: center;
-  padding-bottom: 5px;
-  top: -20px;
-  right: 50px;
-  transform: rotate(-3deg);
-  width: 120px;
-  background-image: linear-gradient(160deg, #ffffff, #ebebeb);
-  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  user-select: none;
-}
-
-#reset-board h1:hover{
-  background-image: linear-gradient(160deg, #ffb3b3, #ff6666);
-}
-
-#reset-board p{
-  position: absolute;
-  font-size: 0.6em;
-  bottom: -57px;
-  left: 15px;
-  user-select: none;
-}
-
-#title p{
-  position: absolute;
-  font-size: 0.6em;
-  bottom: -25px;
-  left: 60px;
-}
-
-#container{
-  margin-bottom: 50px;
-  display: grid;
-  gap: 1.5em;
-  grid-template-columns: repeat(6, 120px);
-  grid-template-rows: repeat(3, 120px);
 }
 
 button{
@@ -210,8 +131,16 @@ button{
   transition: box-shadow 0.1s;
 }
 
+#remove{
+  color: red;
+}
+
 #remove:hover{
   box-shadow: 0px 1px 1px red;
+}
+
+#done{
+  color: green;
 }
 
 #done:hover{
@@ -225,15 +154,6 @@ button{
 .button-container.active{
   pointer-events: all;
   visibility: visible;
-}
-
-
-#remove{
-  color: red;
-}
-
-#done{
-  color: green;
 }
 
 .ver1{

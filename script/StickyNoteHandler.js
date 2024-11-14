@@ -4,10 +4,10 @@ export default class StickyNoteHandler{
     this.errorHandler = errorHandler;
   }
   
-  addBtn = document.getElementById("add")
-  inputNewSticky = document.getElementById("new-post-input")
-  container = document.getElementById("container")
-  doneContainer = document.getElementById("done-container")
+  stickToBoardBtn = document.getElementById("add")
+  newStickyInput = document.getElementById("new-post-input")
+  toDoBoard = document.getElementById("container")
+  doneBoard = document.getElementById("done-container")
   trashIcon = document.getElementById("reset-board")
   doneBoardTrashIcon = document.getElementById("reset-done-board")
   toggle = false;
@@ -21,20 +21,20 @@ export default class StickyNoteHandler{
   }
   
   addEventStickToBoard(){
-    this.addBtn.addEventListener("click", (() => {
-      if(this.container.children.length >= 18) {
+    this.stickToBoardBtn.addEventListener("click", (() => {
+      if(this.toDoBoard.children.length >= 18) {
         this.errorHandler.boardIsFullError()
         return
       }
-      if(!this.inputNewSticky.value){
+      if(!this.newStickyInput.value){
         this.errorHandler.emptyInputError()
-        this.inputNewSticky.focus()
+        this.newStickyInput.focus()
         return 
       } 
       this.styleAndAppendStickyNote()
       this.errorHandler.removeErrorMessages()
-      this.inputNewSticky.value = ""
-      this.inputNewSticky.focus()   
+      this.newStickyInput.value = ""
+      this.newStickyInput.focus()   
     }))      
   }
  
@@ -43,8 +43,8 @@ export default class StickyNoteHandler{
     const stickyNote = document.createElement("div")
     const stickyNoteText = document.createElement("div")
 
-    stickyNoteText.innerText = this.inputNewSticky.value
-    stickyNote.id = `${this.inputNewSticky.value.slice(0, 5)}${rnd}`
+    stickyNoteText.innerText = this.newStickyInput.value
+    stickyNote.id = `${this.newStickyInput.value.slice(0, 5)}${rnd}`
     stickyNote.classList.add("sticky-note")
     stickyNote.classList.add(`ver${Math.floor(Math.random() * 10) + 1}`)
     stickyNote.style.transform = `rotate(${rnd}deg)`
@@ -57,8 +57,8 @@ export default class StickyNoteHandler{
     const stickyNote = this.createStickyNote()
     
     const handleClick = (e) => {
-      const mainBoardNotes = this.container.children
-      const secondBoardNotes = this.doneContainer.children
+      const mainBoardNotes = this.toDoBoard.children
+      const secondBoardNotes = this.doneBoard.children
       for (let i = 0; i < mainBoardNotes.length; i++) {
         if(mainBoardNotes[i] != e.target && mainBoardNotes[i].contentEditable !== "true"){
           mainBoardNotes[i].classList.remove("active")
@@ -77,29 +77,29 @@ export default class StickyNoteHandler{
       }
     }
     stickyNote.addEventListener("click", handleClick)
-    stickyNote.firstElementChild.addEventListener("click", handleClick)
+    this.expandStickyOnClick(stickyNote.firstElementChild)
     stickyNote.appendChild(btnContainer)
-    this.container.appendChild(stickyNote)
+    this.toDoBoard.appendChild(stickyNote)
   }
   
   addEventResetBoard(){
     this.trashIcon.addEventListener("click", (() => {
-      this.container.innerHTML = ""
+      this.toDoBoard.innerHTML = ""
       this.errorHandler.removeErrorMessages()
     }))
   }
   
   addEventResetDoneBoard(){
     this.doneBoardTrashIcon.addEventListener("click", (() => {
-      this.doneContainer.innerHTML = ""
+      this.doneBoard.innerHTML = ""
       this.errorHandler.removeErrorMessages()
     }))
   }
   
   addEventEnterKeyInputField(){  
-    this.inputNewSticky.addEventListener("keydown", ((e) => {
+    this.newStickyInput.addEventListener("keydown", ((e) => {
       if (e.key === "Enter") {
-        this.addBtn.click()
+        this.stickToBoardBtn.click()
       }
     }))
   }
@@ -113,11 +113,11 @@ export default class StickyNoteHandler{
   preventRemovalOfBtnContainer(currentTarget){
     currentTarget.addEventListener('keydown', function(event) {
       const buttonContainer = event.currentTarget.querySelector(".button-container")
-      const childDivs = event.currentTarget.querySelectorAll("div")
+      const divChildren = event.currentTarget.querySelectorAll("div")
       let hasText = false;
       
-      for (let i = 0; i < childDivs.length; i++) {
-        if(childDivs[i].innerText !== "\n"){
+      for (let i = 0; i < divChildren.length; i++) {
+        if(divChildren[i].innerText !== "\n"){
           hasText = true;
           break
         }
@@ -135,16 +135,10 @@ export default class StickyNoteHandler{
   editSticky(btn){
     btn.addEventListener("click", ((e) => {
       const currentTarget = e.currentTarget.parentNode.parentNode
-      const childDivs = currentTarget.querySelectorAll("div")
+      const divChildren = currentTarget.querySelectorAll("div")
       this.preventRemovalOfBtnContainer(currentTarget)
-      let hasText = false;
+      let hasText = this.hasInnerText(currentTarget)
       
-      for (let i = 0; i < childDivs.length; i++) {
-        if(childDivs[i].innerText !== "\n"){
-          hasText = true
-          break
-        }
-      }
       if(!hasText){
           this.errorHandler.emptyEditError()
           currentTarget.focus()
@@ -161,42 +155,60 @@ export default class StickyNoteHandler{
       } else {
         btn.innerText = "EDIT"
       }
+      for (let i = 0; i < divChildren.length; i++) {
+        this.expandStickyOnClick(divChildren[i])
+      }
       this.toggle = !this.toggle
-      //!!!!!!!!!---------DISABLE OTHER EVENTLISTENERS AND REENABLE THEM WHEN DONE EDITING?!!-------------
       e.stopPropagation()
       this.errorHandler.removeErrorMessages()
     }))
   }
 
-  stickyDone(btn){
-    btn.addEventListener("click", ((e) => {
-      const currentTarget = e.currentTarget.parentNode.parentNode
-      const childDivs = currentTarget.querySelectorAll("div")
+  expandStickyOnClick(element){
+    element.addEventListener("click", (e) => {
+      if(element.contentEditable !== "true"){
+        element.parentNode.classList.toggle("active")
+        e.stopPropagation()
+      }
+    })
+  }
+        
 
+  hasInnerText(currentTarget){
+    const divChildren = currentTarget.querySelectorAll("div")
       let hasText = false;
       
-      for (let i = 0; i < childDivs.length; i++) {
-        if(childDivs[i].innerText !== "\n"){
+      for (let i = 0; i < divChildren.length; i++) {
+        if(divChildren[i].innerText !== "\n"){
           hasText = true
           break
         }
       }
+      return hasText
+  }
+
+  stickyDone(btn){
+    btn.addEventListener("click", ((e) => {
+      const currentTarget = e.currentTarget.parentNode.parentNode
+      const buttonContainer = e.target.parentNode
+      let hasText = this.hasInnerText(currentTarget)
+
       if(!hasText){
-          this.errorHandler.emptyEditError()
-          currentTarget.focus()
-          btn.innerText = "SAVE"
-          e.stopPropagation()
-          return
+        this.errorHandler.emptyEditError()
+        currentTarget.focus()
+        btn.innerText = "SAVE"
+        e.stopPropagation()
+        return
       }
 
-     if(this.doneContainer.children.length >= 12) {
-      this.errorHandler.doneBoardIsFullError()
-      return
+      if(this.doneBoard.children.length >= 12) {
+        this.errorHandler.doneBoardIsFullError()
+        return
       }
-      e.target.parentNode.parentNode.classList.remove("active")
-      this.doneContainer.appendChild(e.target.parentNode.parentNode)
-      e.target.parentNode.children[0].remove()
 
+      buttonContainer.parentNode.classList.remove("active")
+      this.doneBoard.appendChild(buttonContainer.parentNode)
+      buttonContainer.children[0].remove()
       this.errorHandler.removeErrorMessages()
     }))
   }
